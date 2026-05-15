@@ -12,7 +12,7 @@ module.exports = {
             .setDescription("Input the JSON code of the embed.")
             .setRequired(true)
         )
-        .addChannelOption(optio => option
+        .addChannelOption(option => option
             .setName("channel")
             .setDescription("Input the channel to send to.")
             .setRequired(true)
