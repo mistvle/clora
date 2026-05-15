@@ -29,6 +29,7 @@ module.exports = {
             {name: "Discord", value: "Discord"},
             {name: "Bot Development", value: "Bot Development"}
         )
+        .setRequired(true)
     )
     .addStringOption(option => option
         .setName("feedback")
