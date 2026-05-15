@@ -18,13 +18,36 @@ module.exports = {
             .setRequired(true)
         )
     ),
-    async execute (interaction) {
-        const isAdmin = interaction.member.permissions.has("Administrator")
-        if (!isAdmin ) {
-            return interaction.reply({content: "<:xMark:1504686168321687574> You do not have permission to run this command.", flags: 64})
-        }
-        const text = interaction.options.getString("json_text");
-        const channel = interaction.options.getChannel("channel");
-        await channel.send(text)
+    async execute(interaction) {
+    const isAdmin = interaction.member.permissions.has("Administrator");
+
+    if (!isAdmin) {
+        return interaction.reply({
+            content: "<:xMark:1504686168321687574> You do not have permission to run this command.",
+            flags: 64
+        });
     }
+
+    const text = interaction.options.getString("json_text");
+    const channel = interaction.options.getChannel("channel");
+
+    try {
+        const data = JSON.parse(text);
+
+        await channel.send(data);
+
+        await interaction.reply({
+            content: "<:check:1504686219223896074> Successfully sent embed.",
+            flags: 64
+        });
+
+    } catch (err) {
+        console.error(err);
+
+        await interaction.reply({
+            content: "<:xMark:1504686168321687574> Invalid JSON provided.",
+            flags: 64
+        });
+    }
+}
 }
